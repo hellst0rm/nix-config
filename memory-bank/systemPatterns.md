@@ -73,3 +73,4 @@ Each feature is a standalone NixOS module.
 - defines [[Host Configuration Pattern]]
 - defines [[Feature Module Pattern]]
 - extracted_to [[patterns/git-history-sanitization-pattern]]
+- extracted_to [[patterns/nix-os-host-definition-pattern]]
