@@ -75,3 +75,4 @@ Each feature is a standalone NixOS module.
 - extracted_to [[patterns/git-history-sanitization-pattern]]
 - extracted_to [[patterns/nix-os-host-definition-pattern]]
 - extracted_to [[patterns/nix-os-feature-module-pattern]]
+- extracted_to [[patterns/nix-development-shell-pattern]]
