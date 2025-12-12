@@ -11,7 +11,7 @@ tags:
 
 ## Current Status
 
-Git history sanitized (squashed to 1 commit). Remote URL corrected. SSH private key removed from history. Repository renamed from nixos-config.
+Repository public on GitHub. Memory structure migrated to .agent-memory/ with kebab-case files. 4 reusable patterns extracted to global memory. Git history clean.
 
 ## What Works
 
@@ -23,6 +23,9 @@ Git history sanitized (squashed to 1 commit). Remote URL corrected. SSH private 
 - [x] Secrets input from nix-secrets
 - [x] Shared library from nix-lib
 - [x] Repository renamed (nixos-* → nix-*)
+- [x] Repository made public
+- [x] Memory structure (.agent-memory/ with kebab-case)
+- [x] Patterns extracted to global memory
 
 ## What's Left
 
