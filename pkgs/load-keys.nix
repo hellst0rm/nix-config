@@ -12,11 +12,10 @@ pog.pog {
   ];
 
   script = _: ''
-    # Unified SSH key loading logic for NixOS ISO
-    # Works for both Ventoy injection and QEMU disk mounting
+    # SSH key loading logic for NixOS ISO
+    # Used by Ventoy injection during initramfs (stage 1)
     #
-    # Usage (initramfs/Ventoy): load-keys <source_dir> <target_root>
-    # Usage (post-boot/QEMU):   load-keys <source_dir> /
+    # Usage: load-keys <source_dir> <target_root>
     #
     # Copies keys from flat structure:
     #   <source>/etc/ssh/* → <target>/etc/ssh/
