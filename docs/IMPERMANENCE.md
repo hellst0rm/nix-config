@@ -6,7 +6,7 @@ This repository includes comprehensive impermanence support for ephemeral root f
 
 The impermanence configuration is split into two parts:
 - **NixOS-level**: [hosts/features/default/impermanence.nix](hosts/features/default/impermanence.nix) - System-wide persistence
-- **Home Manager-level**: [home/features/default/impermanence.nix](home/features/default/impermanence.nix) - User home persistence
+- **Home Manager-level**: [users/features/default/impermanence.nix](users/features/default/impermanence.nix) - User home persistence
 
 ## Default Behavior
 
@@ -80,7 +80,7 @@ Using the library helpers:
 
 ## User-Specific Persistence
 
-In your user's home configuration (e.g., `home/rona/nanoserver.nix`):
+In your user's configuration (e.g., `users/rona/nanoserver.nix`):
 
 ```nix
 { config, ... }:

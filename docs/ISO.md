@@ -68,7 +68,7 @@ etc/ssh/
 root/.ssh/
 ├── deploy_key_ed25519        # Deploy private key
 └── deploy_key_ed25519.pub    # Deploy public key
-home/<user>/.ssh/
+users/<user>/.ssh/
 ├── id_ed25519                # User private key
 └── id_ed25519.pub            # User public key
 ```
@@ -133,7 +133,7 @@ load-keys / $targetRoot
 Automatically detects and loads:
 - SSH host keys from `<source>/etc/ssh/`
 - Deploy keys from `<source>/root/.ssh/`
-- User keys from `<source>/home/*/.ssh/`
+- User keys from `<source>/users/*/.ssh/`
 
 ## Troubleshooting
 

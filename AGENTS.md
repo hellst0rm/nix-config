@@ -13,7 +13,7 @@ nix-config/
 │   ├── features/      # Opt-in/opt-out feature modules
 │   ├── iso/           # ISO image configuration
 │   └── nanoserver/    # Server configuration
-├── home/              # Home Manager configurations
+├── users/             # User (Home Manager) configurations
 ├── modules/           # Reusable NixOS and HM modules
 │   ├── nixos/         # NixOS modules
 │   └── home-manager/  # Home Manager modules
