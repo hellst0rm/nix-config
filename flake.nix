@@ -22,11 +22,12 @@
     nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
-    systems.url = "https://flakehub.com/f/nix-systems/default-linux/0.1.*.tar.gz";
+    systems.url = "github:nix-systems/default-linux";
 
-    # Shared library for NixOS/Home Manager builders (FlakeHub)
+    # Shared library for NixOS/Home Manager builders
+    # TODO: Switch to FlakeHub once published: https://flakehub.com/f/RogerNavelsaker/nix-lib/*.tar.gz
     nix-lib = {
-      url = "https://flakehub.com/f/RogerNavelsaker/nix-lib/*.tar.gz";
+      url = "github:RogerNavelsaker/nix-lib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
