@@ -16,7 +16,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
@@ -56,8 +56,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    determinate.url = "github:DeterminateSystems/determinate";
-
     pog = {
       url = "github:jpetrucciani/pog";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,9 +66,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Private repo - use git+file for local dev
+    # Private repo - use deploy key via custom hostname
     nix-secrets = {
-      url = "git+file:../nix-secrets";
+      url = "git+ssh://git@github-nix-secrets/RogerNavelsaker/nix-secrets";
       flake = false;
     };
   };
@@ -152,6 +150,16 @@
           #secrets = inputs.nix-secrets;
           features = {
             # opt-in = [ "desktop" "development" ];
+          };
+        };
+
+        "rona@aio" = {
+          username = "rona";
+          hostname = "aio";
+          system = "x86_64-linux";
+          stateVersion = "25.11";
+          features = {
+            # opt-in = [ ];
           };
         };
       };
