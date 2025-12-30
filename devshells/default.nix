@@ -47,14 +47,6 @@ in
       common
       ;
   };
-  nix-repos = import ./nix-repos.nix {
-    inherit
-      inputs
-      pkgs
-      mkProjectShell
-      common
-      ;
-  };
   nix-lib = import ./nix-lib.nix {
     inherit
       inputs
