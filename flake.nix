@@ -104,7 +104,7 @@
         }
       );
       formatter = lib.forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
-      devShells = lib.forEachSystem (pkgs: import ./shell.nix { inherit inputs pkgs; });
+      devShells = lib.forEachSystem (pkgs: import ./devshells { inherit inputs pkgs; });
       checks = lib.forEachSystem (
         pkgs:
         import ./checks.nix {

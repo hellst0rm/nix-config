@@ -1,0 +1,108 @@
+# devshells/default.nix
+# Entry point for all devshells
+{
+  inputs,
+  pkgs,
+}:
+let
+  inherit (pkgs.stdenv.hostPlatform) system;
+  inherit (inputs.devshell.legacyPackages.${system}) mkShell;
+
+  common = import ./common.nix { inherit inputs pkgs system; };
+
+  # Helper to merge common config with project-specific
+  mkProjectShell =
+    {
+      name,
+      motd ? "",
+      packages ? [ ],
+      commands ? [ ],
+      startup ? { },
+      env ? [ ],
+    }:
+    mkShell {
+      inherit name motd env;
+      packages = common.packages ++ packages;
+      commands = common.commands ++ commands;
+      devshell.startup = common.startup // startup;
+    };
+in
+{
+  # Default shell (nix-config)
+  default = import ./nix-config.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+
+  # Nix ecosystem shells
+  nix-config = import ./nix-config.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  nix-repos = import ./nix-repos.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  nix-lib = import ./nix-lib.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  nix-keys = import ./nix-keys.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  nix-secrets = import ./nix-secrets.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+
+  # Project shells
+  senshac = import ./senshac.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  modern-cli-mcp = import ./modern-cli-mcp.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+  codebase-mcp = import ./codebase-mcp.nix {
+    inherit
+      inputs
+      pkgs
+      mkProjectShell
+      common
+      ;
+  };
+}
