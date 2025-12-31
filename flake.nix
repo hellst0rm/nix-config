@@ -25,7 +25,7 @@
     systems.url = "github:nix-systems/default-linux";
 
     nix-lib = {
-      url = "git+file:///home/rona/Repositories/nix-repos/nix-lib";
+      url = "github:RogerNavelsaker/nix-lib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };

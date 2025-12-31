@@ -255,17 +255,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1767178173,
-        "narHash": "sha256-bcpYBkV1mw7ug5xFKSSKkTivl4vIpatgNMbIJQievIs=",
-        "ref": "refs/heads/main",
-        "rev": "754ae382ed0ea9a16e4090b64ce4a9627f8be760",
-        "revCount": 15,
-        "type": "git",
-        "url": "file:///home/rona/Repositories/nix-repos/nix-lib"
+        "lastModified": 1767179944,
+        "narHash": "sha256-nXDk3giO0pxdlnoDVk5tajG4S3iPq4mFnKZY3Pu8GqM=",
+        "owner": "RogerNavelsaker",
+        "repo": "nix-lib",
+        "rev": "3b9bf6e6eb77b8df6ca0bcb7963aa722b60203d2",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/rona/Repositories/nix-repos/nix-lib"
+        "owner": "RogerNavelsaker",
+        "repo": "nix-lib",
+        "type": "github"
       }
     },
     "nix-secrets": {
