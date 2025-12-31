@@ -52,10 +52,11 @@
       SearchBar = "unified";
     };
 
-    # Default profile
-    profiles.default = {
+    # Use existing profile (preserves bookmarks, history, extensions)
+    profiles."uu5fkg20.default-release" = {
       id = 0;
       isDefault = true;
+      path = "uu5fkg20.default-release";
 
       # Search engines
       search = {

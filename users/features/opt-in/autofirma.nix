@@ -12,9 +12,9 @@
   programs.autofirma = {
     enable = true;
 
-    # Firefox integration
+    # Firefox integration - must match profile name in firefox.nix
     firefoxIntegration.profiles = {
-      default = {
+      "uu5fkg20.default-release" = {
         enable = true;
       };
     };
