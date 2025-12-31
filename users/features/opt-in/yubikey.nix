@@ -10,6 +10,7 @@
       yubikey-manager # ykman CLI
       yubikey-personalization # ykpersonalize
       yubico-piv-tool # PIV operations
+      yubioath-flutter # Yubico Authenticator GUI
     ];
 
     # Ensure SSH uses GPG agent
