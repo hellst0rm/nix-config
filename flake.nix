@@ -25,7 +25,7 @@
     systems.url = "github:nix-systems/default-linux";
 
     nix-lib = {
-      url = "github:RogerNavelsaker/nix-lib";
+      url = "git+file:///home/rona/Repositories/nix-repos/nix-lib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
@@ -144,6 +144,14 @@
           features = {
             opt-in = [ "wifi/NaCo" ];
           };
+          # User features for integrated HM mode
+          userFeatures = {
+            opt-out = [
+              "git"
+              "direnv"
+              "ssh"
+            ];
+          };
         };
       };
 
@@ -160,15 +168,28 @@
           };
         };
 
+        # Arch Linux standalone Home Manager
         "rona@aio" = {
           username = "rona";
           hostname = "aio";
           system = "x86_64-linux";
           stateVersion = "25.11";
           features = {
-            # opt-in = [ ];
+            opt-in = [
+              "claude-code"
+              "goose"
+            ];
           };
         };
       };
+
+      # Apps for easy activation (generated from homeConfigurations)
+      apps = lib.forEachSystem (
+        _:
+        lib.mkHomeApps {
+          inherit self;
+          default = "rona@aio";
+        }
+      );
     };
 }

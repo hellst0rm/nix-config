@@ -1,6 +1,7 @@
-# users/rona/aio/goose.nix
+# users/features/opt-in/goose.nix
 #
-# Goose CLI configuration - primary interface using claude-code as backend
+# Goose CLI configuration - AI agent interface
+# Opt-in feature, requires llm-agents input
 #
 {
   config,
@@ -14,9 +15,35 @@ let
   hasLlmAgents = inputs ? llm-agents;
   goose-cli = if hasLlmAgents then inputs.llm-agents.packages.${pkgs.system}.goose-cli else null;
 
-  # Import local lib for recipe generation
-  localLib = import ./lib.nix { inherit lib; };
-  inherit (localLib) mkGooseRecipe;
+  # Helper function to generate goose recipe YAML
+  mkGooseRecipe =
+    {
+      name,
+      description,
+      prompt,
+      parameters ? [ ],
+    }:
+    let
+      paramsYaml =
+        if parameters == [ ] then
+          ""
+        else
+          ''
+            parameters:
+            ${lib.concatMapStringsSep "\n" (
+              p:
+              "  - key: ${p.key}\n    input_type: ${p.type or "string"}\n    requirement: ${p.requirement or "optional"}"
+            ) parameters}
+          '';
+    in
+    ''
+      version: "1.0.0"
+      title: "${name}"
+      description: "${description}"
+      prompt: |
+        ${lib.concatMapStringsSep "\n  " (x: x) (lib.splitString "\n" prompt)}
+      ${paramsYaml}
+    '';
 
   # Goose main config
   gooseConfig = ''

@@ -1,7 +1,7 @@
-# users/rona/aio/claude-code.nix
+# users/features/opt-in/claude-code.nix
 #
-# Claude Code configuration - backend provider for goose
-# All content inline as Nix strings
+# Claude Code configuration with ACE (Agentic Context Engineering) system
+# Opt-in feature for AI-assisted development
 #
 { config, ... }:
 {

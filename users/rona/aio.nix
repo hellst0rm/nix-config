@@ -1,8 +1,12 @@
 # users/rona/aio.nix
 #
-# Wrapper that imports the aio directory module
+# Home Manager configuration for rona on Arch Linux (aio)
 #
-{ ... }:
-{
-  imports = [ ./aio ];
+# Features loaded automatically by mkHome:
+# - default/*: shell, dev-tools, editor, environment
+# - opt-out/*: git, direnv, ssh (included by default)
+# - opt-in: claude-code, goose (specified in flake.nix)
+#
+_: {
+  # AIO-specific config only (features handled by mkHome)
 }

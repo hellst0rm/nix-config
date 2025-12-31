@@ -1,61 +1,11 @@
-# home/rona/nanoserver.nix
-{
-  pkgs,
-  ...
-}:
-{
-  # Basic CLI tools
-  home.packages = with pkgs; [
-    # File management
-    eza
-    bat
-    fd
-    ripgrep
-    sd
-    zoxide
-
-    # Development
-    git
-    vim
-    neovim
-
-    # System utilities
-    htop
-    curl
-    wget
-  ];
-
-  programs = {
-    # Shell configuration
-    fish = {
-      enable = true;
-      shellAliases = {
-        ls = "eza";
-        ll = "eza -l";
-        la = "eza -la";
-        cat = "bat";
-        grep = "rg";
-      };
-    };
-
-    # Git configuration
-    git = {
-      enable = true;
-      userName = "rona";
-      userEmail = "rona@example.com";
-    };
-
-    # Helix editor
-    helix = {
-      enable = true;
-      settings = {
-        theme = "base16_transparent";
-        editor = {
-          line-number = "relative";
-          cursorline = true;
-          auto-save = true;
-        };
-      };
-    };
-  };
+# users/rona/nanoserver.nix
+#
+# Home Manager configuration for rona on nanoserver
+#
+# Features loaded automatically by mkHome:
+# - default/*: shell, dev-tools, editor, environment
+# - opt-out/*: git, direnv, ssh (included by default)
+#
+_: {
+  # Nanoserver-specific config (features handled by mkHome)
 }
