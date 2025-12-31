@@ -9,7 +9,8 @@
     enable = true;
 
     # PKCS#11 modules for smart card/YubiKey support
-    pkcs11Modules = [ pkgs.opensc ];
+    # Disabled due to bug in HM module with empty ln operand
+    # pkcs11Modules = [ pkgs.opensc ];
 
     # Enterprise policies
     policies = {
@@ -55,13 +56,6 @@
     profiles.default = {
       id = 0;
       isDefault = true;
-
-      # Extensions (from NUR or nixpkgs)
-      extensions.packages = [
-        # Add extensions here when firefox-addons is available
-        # ublock-origin
-        # bitwarden
-      ];
 
       # Search engines
       search = {
