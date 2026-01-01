@@ -2,16 +2,30 @@
 #
 # YubiKey support with GPG agent for SSH authentication
 # Requires system-level: services.pcscd.enable = true
+# For non-NixOS: also enable nixgl feature for yubioath-flutter GUI
 #
-{ pkgs, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  # Tell nixgl to wrap yubioath if nixgl is enabled
+  nixgl.wrapYubioath = lib.mkIf (config.nixgl.enable or false) true;
+
   home = {
-    packages = with pkgs; [
-      yubikey-manager # ykman CLI
-      yubikey-personalization # ykpersonalize
-      yubico-piv-tool # PIV operations
-      yubioath-flutter # Yubico Authenticator GUI
-    ];
+    packages =
+      with pkgs;
+      [
+        yubikey-manager # ykman CLI
+        yubikey-personalization # ykpersonalize
+        yubico-piv-tool # PIV operations
+      ]
+      # Only install yubioath-flutter directly if nixgl is not providing it
+      ++ lib.optionals (!(config.nixgl.enable or false)) [
+        yubioath-flutter # Yubico Authenticator GUI
+      ];
 
     # Ensure SSH uses GPG agent
     sessionVariables = {

@@ -84,6 +84,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Private repo - use deploy key via custom hostname
     nix-secrets = {
       url = "git+ssh://git@github-nix-secrets/RogerNavelsaker/nix-secrets";
@@ -193,6 +198,7 @@
               "claude-code"
               "firefox"
               "goose"
+              "nixgl" # GPU wrapper for non-NixOS
               "plasma"
               "tailscale"
               "terminals"

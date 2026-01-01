@@ -1,12 +1,20 @@
 # users/features/opt-in/terminals.nix
 #
 # Terminal emulators: Alacritty, Kitty, Zellij
+# For non-NixOS: also enable nixgl feature for GPU acceleration
 #
-_: {
+{
+  pkgs,
+  lib,
+  ...
+}:
+{
   programs = {
     # Alacritty - GPU-accelerated terminal
     alacritty = {
       enable = true;
+      # Default package; nixgl feature overrides this with mkForce
+      package = lib.mkDefault pkgs.alacritty;
       settings = {
         env = {
           TERM = "xterm-256color";
@@ -139,6 +147,8 @@ _: {
     # Kitty - feature-rich terminal
     kitty = {
       enable = true;
+      # Default package; nixgl feature overrides this with mkForce
+      package = lib.mkDefault pkgs.kitty;
       settings = {
         # Font
         font_family = "monospace";
