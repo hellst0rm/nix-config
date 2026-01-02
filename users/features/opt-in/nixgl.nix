@@ -60,6 +60,7 @@ let
     pkgs.runCommand "${pkg.name}-nixgl"
       {
         inherit (pkg) pname version;
+        nativeBuildInputs = [ pkgs.gnused ];
         meta = (pkg.meta or { }) // {
           mainProgram = pkg.meta.mainProgram or pkg.pname or (builtins.parseDrvName pkg.name).name;
         };
@@ -75,8 +76,31 @@ let
         EOF
           chmod +x $out/bin/$name
         done
-        # Link share directory for desktop files, icons, etc
-        ln -s ${pkg}/share $out/share 2>/dev/null || true
+
+        # Copy share directory, patching desktop files to use absolute paths
+        if [ -d "${pkg}/share" ]; then
+          mkdir -p $out/share
+          for item in ${pkg}/share/*; do
+            name=$(basename "$item")
+            if [ "$name" = "applications" ] && [ -d "$item" ]; then
+              mkdir -p $out/share/applications
+              for desktop in "$item"/*.desktop; do
+                [ -f "$desktop" ] || continue
+                name=$(basename "$desktop")
+                # Get the main program name from desktop file
+                mainProg=$(grep -m1 "^Exec=" "$desktop" | sed 's/^Exec=//' | awk '{print $1}')
+                if [ -x "$out/bin/$mainProg" ]; then
+                  # Patch Exec= lines to use absolute path
+                  sed "s|^Exec=$mainProg|Exec=$out/bin/$mainProg|g; s|^TryExec=$mainProg|TryExec=$out/bin/$mainProg|g" "$desktop" > "$out/share/applications/$name"
+                else
+                  cp "$desktop" "$out/share/applications/$name"
+                fi
+              done
+            else
+              ln -s "$item" "$out/share/$name"
+            fi
+          done
+        fi
       '';
 
   cfg = config.nixgl;
@@ -150,8 +174,15 @@ in
     nixgl.enable = lib.mkDefault true;
 
     # Wrap home.packages apps only if requested by other modules
+    # Also install nixGL commands for manual use (e.g., nixGLIntel firefox)
     home.packages =
-      lib.optionals (cfg.enable && cfg.wrapBeeper) [ (wrapGL pkgs.beeper) ]
+      lib.optionals cfg.enable [
+        glPkg
+      ]
+      ++ lib.optionals (cfg.enable && cfg.vulkan != null) [
+        vulkanPackages.${cfg.vulkan}
+      ]
+      ++ lib.optionals (cfg.enable && cfg.wrapBeeper) [ (wrapGL pkgs.beeper) ]
       ++ lib.optionals (cfg.enable && cfg.wrapYubioath) [ (wrapGL pkgs.yubioath-flutter) ]
       ++ lib.optionals (cfg.enable && cfg.wrapBitwarden) [ (wrapGL pkgs.bitwarden-desktop) ];
 
