@@ -47,6 +47,22 @@ in
       common
       ;
   };
+  # Base shell without motd (for layered .envrc remote reference)
+  nix-config-base = import ./nix-config.nix {
+    inherit
+      inputs
+      pkgs
+      common
+      ;
+    mkProjectShell =
+      args:
+      mkProjectShell (
+        args
+        // {
+          motd = "";
+        }
+      );
+  };
   nix-repos = import ./nix-repos.nix {
     inherit
       inputs
